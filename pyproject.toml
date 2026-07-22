@@ -1,0 +1,13 @@
+[project]
+name = "kafka101"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "confluent-kafka>=2.14.2",
+    "faker>=40.28.1",
+    "python-dotenv>=1.2.2",
+    "requests[socks]>=2.34.2",
+    "requests-ip-rotator>=1.0.18",
+]
