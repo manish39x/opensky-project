@@ -3,11 +3,11 @@ from confluent_kafka import Consumer
 
 consumer = Consumer({
   'bootstrap.servers': 'localhost:9092',
-  'group.id': 'taxi-group',
+  'group.id': 'flight-group',
   'auto.offset.reset': 'earliest'
 })
 
-consumer.subscribe(['taxi-trips'])
+consumer.subscribe(['flight-telemetry'])
 
 print("Listening for messages...")
 
@@ -19,9 +19,8 @@ try:
     if msg.error():
       print(f"Error: {msg.error()}")
       continue
-    trip = json.loads(msg.value().decode('utf-8'))
-    print(f"[P{msg.partition()} | offset {msg.offset()}] "
-          f"{trip['trip_id']} | {trip['user_id']} | ${trip['fare_per_person']} | loc: {trip['pickup_location']}")
+    flight = json.loads(msg.value().decode('utf-8'))
+    print(f"flight: {flight}")
 
 except KeyboardInterrupt:
   pass
