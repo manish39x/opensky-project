@@ -10,4 +10,6 @@ dependencies = [
     "python-dotenv>=1.2.2",
     "requests[socks]>=2.34.2",
     "requests-ip-rotator>=1.0.18",
+    "pydantic>=2.13.4",
+    "pydantic-settings>=2.14.2",
 ]

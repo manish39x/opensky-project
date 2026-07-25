@@ -1,22 +1,19 @@
 import requests
-import dotenv
 from datetime import datetime, timedelta
-import os
-
-dotenv.load_dotenv()
 
 TOKEN_URL = "https://auth.opensky-network.org/auth/realms/opensky-network/protocol/openid-connect/token"
-CLIENT_ID = os.getenv("OPENSKY_CLIENT_ID")
-CLIENT_SECRET = os.getenv("OPENSKY_CLIENT_SECRET")
 
 # How many seconds before expiry to proactively refresh the token.
 TOKEN_REFRESH_MARGIN = 30
 
 
 class TokenManager:
-    def __init__(self):
+    def __init__(self, client_id, client_secret, timeout=30):
         self.token = None
         self.expires_at = None
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.timeout = timeout
 
     def get_token(self):
         """Return a valid access token, refreshing automatically if needed."""
@@ -30,9 +27,10 @@ class TokenManager:
             TOKEN_URL,
             data={
                 "grant_type": "client_credentials",
-                "client_id": CLIENT_ID,
-                "client_secret": CLIENT_SECRET,
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
             },
+            timeout=self.timeout
         )
         r.raise_for_status()
 
