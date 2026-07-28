@@ -30,5 +30,3 @@ class Config(BaseSettings):
     extra="ignore"          # Ignores extra variables in .env without breaking
   )
 
-
-settings = Config()

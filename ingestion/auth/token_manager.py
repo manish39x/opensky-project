@@ -8,11 +8,12 @@ TOKEN_REFRESH_MARGIN = 30
 
 
 class TokenManager:
-    def __init__(self, client_id, client_secret, timeout=30):
+    def __init__(self, client_id, client_secret,proxy_url, timeout=30):
         self.token = None
         self.expires_at = None
         self.client_id = client_id
         self.client_secret = client_secret
+        self.proxy_url = proxy_url
         self.timeout = timeout
 
     def get_token(self):
@@ -25,6 +26,10 @@ class TokenManager:
         """Fetch a new access token from the OpenSky authentication server."""
         r = requests.post(
             TOKEN_URL,
+            proxies =  {
+                        'http': self.proxy_url,
+                        'https': self.proxy_url
+                       },
             data={
                 "grant_type": "client_credentials",
                 "client_id": self.client_id,

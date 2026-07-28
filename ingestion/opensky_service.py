@@ -74,7 +74,7 @@ class OpenSkyFlightService:
 
     if not data or 'states' not in data or data['states'] is None:
       logger.info("Opensky payload empty or no flight in the boundBox")
-      return []
+      return {"time": data.get("time") if data else None, "states":[]}
 
-    logger.info(f"Retrieved {len(data['states'])} active aircraft states.")
-    return data.get("states", [])
+    logger.info(f"[{data['time']}]Retrieved {len(data['states'])} active aircraft states.")
+    return data
