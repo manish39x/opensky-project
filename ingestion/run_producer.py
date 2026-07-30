@@ -2,10 +2,14 @@ from ingestion.config import Config
 from ingestion.auth.token_manager import TokenManager
 from ingestion.opensky_service import OpenSkyFlightService, OpenSkyFetchError
 from ingestion.kafka_producer import KafkaProducerService
-from logging import getLogger
+import logging
 import time
 
-logger = getLogger(__name__)
+logging.basicConfig(
+  level=logging.INFO,
+  format="%(asctime)s %(name)s %(levelname)s %(message)s"
+)
+logger = logging.getLogger(__name__)
 
 config = Config()
 token_manager = TokenManager(config.opensky_client_id,

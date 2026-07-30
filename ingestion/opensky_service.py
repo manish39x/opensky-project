@@ -46,7 +46,7 @@ class OpenSkyFlightService:
       response = self._request()
 
       if response.status_code==200:
-        logger.info(f"Successfully fetched aircraft telemetry on attempt {attempt + 1}")
+        # logger.info(f"Successfully fetched aircraft telemetry on attempt {attempt + 1}")
         return response.json()
       
       elif response.status_code==429:
